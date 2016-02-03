@@ -25,6 +25,14 @@ TEST_METHOD(TestMethod1)
 {
 	//test code
 	//for ex. AssertIsTrue(Boolean);
+	printf("Test Method 1\n");
+}
+
+TEST_METHOD(TestMethod2)
+{
+	//test code
+	//for ex. AssertIsTrue(Boolean);
+	printf("Test Method 2\n");
 }
 
 int main(int argc, char **argv)
@@ -32,8 +40,9 @@ int main(int argc, char **argv)
 	TEST_GROUP *tGroup;
 	tGroup = group_create("TestGroup1");
 	group_add_test(tGroup, TestMethod1);
-	//group_run_all(tGroup);
-	//group_free(tGroup);
+	group_add_test(tGroup, TestMethod2);
+	group_run_all(tGroup);
+	group_free(tGroup);
 	
 	return EXIT_SUCCESS;
 }

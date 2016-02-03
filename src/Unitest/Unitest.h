@@ -25,15 +25,14 @@
 
 #define TEST_METHOD(methodName) static void methodName(void)
 
+//represents a test method
+typedef void(*TMethod) (void);
+
 enum
 {
 	LIMIT = 1,
 	GROW = 2
 };
-
-
-typedef void(*TMethod) (void);
-
 
 typedef struct List
 {
@@ -45,6 +44,7 @@ typedef struct List
 }List, *PList;
 
 
+//a group of test methods
 typedef struct TEST_GROUP
 {
 	const char *name;
@@ -52,10 +52,27 @@ typedef struct TEST_GROUP
 }TEST_GROUP, *PTEST_GROUP;
 
 
+//list
 List *list_create(void);
 
 void list_add(List *list, void *p);
 
+void list_front(List * list);
+
+bool list_at_end(List * list);
+
+void list_advance(List * list);
+
+void *list_val(List * list);
+
+void list_free(List * list);
+
+
+//group
 TEST_GROUP *group_create(const char *name);
 
 void group_add_test(TEST_GROUP *tGroup, TMethod tMethod);
+
+void group_run_all(TEST_GROUP *tGroup);
+
+void group_free(TEST_GROUP *tGroup);
