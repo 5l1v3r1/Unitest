@@ -24,25 +24,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 TEST_METHOD(TestMethod1)
 {
 	//test code
-	//for ex. AssertIsTrue(Boolean);
-	printf("Test Method 1\n");
+	int xxx = 100;
+	AssertAreEqual_int(101, xxx);
 }
 
 TEST_METHOD(TestMethod2)
 {
 	//test code
-	//for ex. AssertIsTrue(Boolean);
-	printf("Test Method 2\n");
+	int yyy = 101;
+	AssertAreEqual_int(101, yyy);
 }
 
 int main(int argc, char **argv)
 {
 	TEST_GROUP *tGroup;
+
 	tGroup = group_create("TestGroup1");
+
 	group_add_test(tGroup, TestMethod1);
 	group_add_test(tGroup, TestMethod2);
+
 	group_run_all(tGroup);
+
 	group_free(tGroup);
-	
+
 	return EXIT_SUCCESS;
 }

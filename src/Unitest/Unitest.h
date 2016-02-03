@@ -22,11 +22,22 @@
 
 #include "Common.h"
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdarg.h>
 
 #define TEST_METHOD(methodName) static void methodName(void)
 
 //represents a test method
-typedef void(*TMethod) (void);
+typedef void(*TFunction) (void);
+
+
+//method structure
+typedef struct TMethod
+{
+	const char *name;
+	TFunction function;
+}TMethod, *PTMethod;
+
 
 enum
 {
@@ -34,6 +45,8 @@ enum
 	GROW = 2
 };
 
+
+//list of objects
 typedef struct List
 {
 	unsigned int num_elements;
@@ -71,8 +84,29 @@ void list_free(List * list);
 //group
 TEST_GROUP *group_create(const char *name);
 
-void group_add_test(TEST_GROUP *tGroup, TMethod tMethod);
+void _group_add_test(TEST_GROUP *tGroup, TFunction tFunction, const char *fName);
+
+#define group_add_test(Group, Function) _group_add_test(Group, Function, #Function);
 
 void group_run_all(TEST_GROUP *tGroup);
 
 void group_free(TEST_GROUP *tGroup);
+
+
+//assert
+void _assert_failed(const char *expr, ...);
+void _assert_succeeded(const char *expr, ...);
+
+#define _assert_msg(expr, ...) \
+  (expr) ? \
+     _assert_succeeded("Assertion '"#expr"' succeeded" , ## __VA_ARGS__, NULL) : \
+     _assert_failed("Assertion '"#expr"' failed" , ## __VA_ARGS__, NULL)
+
+
+#define _assert_int(X, OP, Y) {\
+	long long _ck_x = (X); \
+	long long _ck_y = (Y); \
+	_assert_msg(_ck_x OP _ck_y, "Assertion '%s' failed: %s == %jd", #X" "#OP" "#Y, #Y, _ck_y); \
+}
+
+#define AssertAreEqual_int(X, Y) _assert_int(X, ==, Y)

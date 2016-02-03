@@ -146,10 +146,18 @@ TEST_GROUP *group_create(const char *name)
 }
 
 
-void group_add_test(TEST_GROUP *tGroup, TMethod tMethod)
+void _group_add_test(TEST_GROUP *tGroup, TFunction tFunction, const char *fName)
 {
-	if (tGroup == NULL || tMethod == NULL)
+	TMethod *tMethod;
+
+	if (tGroup == NULL || tFunction == NULL)
 		return;
+
+	if (!(tMethod = (TMethod *)amalloc(sizeof(TMethod))))
+		return NULL;
+
+	tMethod->name = fName;
+	tMethod->function = tFunction;
 
 	list_add(tGroup->methods, tMethod);
 }
@@ -158,7 +166,7 @@ void group_add_test(TEST_GROUP *tGroup, TMethod tMethod)
 void group_run_all(TEST_GROUP *tGroup)
 {
 	List *methods;
-	TMethod tMethod;
+	TMethod *tMethod;
 
 	if (tGroup == NULL || tGroup->methods == NULL)
 		return;
@@ -167,17 +175,75 @@ void group_run_all(TEST_GROUP *tGroup)
 
 	for (list_front(methods); !list_at_end(methods); list_advance(methods))
 	{
-		tMethod = (TMethod)list_val(methods);
-		tMethod();
+		tMethod = (TMethod*)list_val(methods);
+		printf("--[[ %s: %s\n", tGroup->name, tMethod->name);
+		tMethod->function();
 	}
 }
 
 
 void group_free(TEST_GROUP *tGroup)
 {
+	List *methods;
+	TMethod *tMethod;
+
 	if (tGroup == NULL)
 		return;
 
+	methods = tGroup->methods;
+	for (list_front(methods); !list_at_end(methods); list_advance(methods))
+	{
+		tMethod = (TMethod*)list_val(methods);
+		afree(tMethod);
+	}
+
 	list_free(tGroup->methods);
+
 	afree(tGroup);
+}
+
+
+void _assert_failed(const char *expr, ...)
+{
+	const char *msg;
+	va_list valist;
+	char buf[BUFSIZ];
+
+	va_start(valist, expr);
+	msg = (const char *)va_arg(valist, char *);
+
+	if (msg != NULL)
+	{
+		vsnprintf_s(buf, BUFSIZ, _TRUNCATE, msg, valist);
+		printf("[FAILURE] %s\n\n", buf);
+	}
+	else
+	{
+		printf("[FAILURE] %s\n\n", expr);
+	}
+
+	va_end(valist);
+}
+
+
+void _assert_succeeded(const char *expr, ...)
+{
+	const char *msg;
+	va_list valist;
+	char buf[BUFSIZ];
+
+	va_start(valist, expr);
+	msg = (const char *)va_arg(valist, char *);
+
+	if (msg != NULL)
+	{
+		vsnprintf_s(buf, BUFSIZ, _TRUNCATE, msg, valist);
+		printf("[SUCCESS] %s\n", buf);
+	}
+	else
+	{
+		printf("[SUCCESS] %s\n", expr);
+	}
+
+	va_end(valist);
 }
