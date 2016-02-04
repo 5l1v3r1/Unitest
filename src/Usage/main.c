@@ -25,14 +25,50 @@ TEST_METHOD(TestMethod1)
 {
 	//test code
 	int xxx = 100;
+	double zzz = 21.00012345;
+	const char *aaa = "test000";
+	bool xyz = true;
+	char www[10] = { 0 };
+
 	AssertAreEqual_int(101, xxx);
+	AssertAreNotEqual_int(101, xxx);
+
+	AssertAreEqual_double(21.100123, zzz);
+	AssertAreNotEqual_double(21.100123, zzz);
+
+	AssertAreEqual_str("test111", aaa);
+	AssertAreNotEqual_str("test111", aaa);
+
+	AssertIsTrue(xyz);
+	AssertIsFalse(xyz);
+
+	AssertIsNull(www);
+	AssertIsNotNull(www);
 }
 
 TEST_METHOD(TestMethod2)
 {
 	//test code
 	int yyy = 101;
+	double zzz = 22.00012345;
+	const char *ccc = "test222";
+	bool zxc = false;
+	char *ttt = NULL;
+
 	AssertAreEqual_int(101, yyy);
+	AssertAreNotEqual_int(101, yyy);
+
+	AssertAreEqual_double(22.00012345, zzz);
+	AssertAreNotEqual_double(22.00012345, zzz);
+
+	AssertAreEqual_str("test222", ccc);
+	AssertAreNotEqual_str("test222", ccc);
+
+	AssertIsTrue(zxc);
+	AssertIsFalse(zxc);
+
+	AssertIsNull(ttt);
+	AssertIsNotNull(ttt);
 }
 
 int main(int argc, char **argv)

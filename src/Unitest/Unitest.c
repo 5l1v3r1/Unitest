@@ -176,7 +176,7 @@ void group_run_all(TEST_GROUP *tGroup)
 	for (list_front(methods); !list_at_end(methods); list_advance(methods))
 	{
 		tMethod = (TMethod*)list_val(methods);
-		printf("--[[ %s: %s\n", tGroup->name, tMethod->name);
+		printf("\n--[[ %s: %s\n", tGroup->name, tMethod->name);
 		tMethod->function();
 	}
 }
@@ -203,47 +203,27 @@ void group_free(TEST_GROUP *tGroup)
 }
 
 
-void _assert_failed(const char *expr, ...)
+void _assert_failed(const char *msg, ...)
 {
-	const char *msg;
 	va_list valist;
 	char buf[BUFSIZ];
 
-	va_start(valist, expr);
-	msg = (const char *)va_arg(valist, char *);
-
-	if (msg != NULL)
-	{
-		vsnprintf_s(buf, BUFSIZ, _TRUNCATE, msg, valist);
-		printf("[FAILURE] %s\n\n", buf);
-	}
-	else
-	{
-		printf("[FAILURE] %s\n\n", expr);
-	}
+	va_start(valist, msg);
+	vsnprintf_s(buf, BUFSIZ, _TRUNCATE, msg, valist);
+	printf("[FAILURE] %s\n", buf);
 
 	va_end(valist);
 }
 
 
-void _assert_succeeded(const char *expr, ...)
+void _assert_succeeded(const char *msg, ...)
 {
-	const char *msg;
 	va_list valist;
 	char buf[BUFSIZ];
 
-	va_start(valist, expr);
-	msg = (const char *)va_arg(valist, char *);
-
-	if (msg != NULL)
-	{
-		vsnprintf_s(buf, BUFSIZ, _TRUNCATE, msg, valist);
-		printf("[SUCCESS] %s\n", buf);
-	}
-	else
-	{
-		printf("[SUCCESS] %s\n", expr);
-	}
+	va_start(valist, msg);
+	vsnprintf_s(buf, BUFSIZ, _TRUNCATE, msg, valist);
+	printf("[SUCCESS] %s\n", buf);
 
 	va_end(valist);
 }
