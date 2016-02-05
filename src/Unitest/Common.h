@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <stdlib.h>
 #include <malloc.h>
+#include <memory.h>
 
 #define SUCCESS	1
 #define FAILURE	0

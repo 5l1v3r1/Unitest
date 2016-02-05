@@ -154,7 +154,7 @@ void _group_add_test(TEST_GROUP *tGroup, TFunction tFunction, const char *fName)
 		return;
 
 	if (!(tMethod = (TMethod *)amalloc(sizeof(TMethod))))
-		return NULL;
+		return;
 
 	tMethod->name = fName;
 	tMethod->function = tFunction;

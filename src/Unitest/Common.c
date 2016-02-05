@@ -21,7 +21,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 void *amalloc(size_t size)
 {
 	void *mem;
-
 	if (size <= 0) return NULL;
 	if (!(mem = malloc(size))) return NULL;
 	azero(mem, size);
@@ -30,7 +29,9 @@ void *amalloc(size_t size)
 
 void* arealloc(void *mem, size_t size)
 {
+	void *tmp;
 	if (size <= 0) return NULL;
-	if (!(mem = realloc(mem, size))) return NULL;
+	if (!(tmp = realloc(mem, size))) return NULL;
+	mem = tmp;
 	return mem;
 }

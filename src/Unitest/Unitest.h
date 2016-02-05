@@ -149,8 +149,8 @@ void _assert_succeeded(const char *expr, ...);
 #define AssertAreEqual_str(X, Y) _assert_str(X, ==, Y)
 #define AssertAreNotEqual_str(X, Y) _assert_str(X, !=, Y)
 
-#define AssertIsTrue(X) _assert_true(X, ==, true)
-#define AssertIsFalse(X) _assert_true(X, !=, true)
+#define AssertIsTrue(X) _assert_true(X, ==)
+#define AssertIsFalse(X) _assert_true(X, !=)
 
-#define AssertIsNull(X) _assert_null(X, ==, NULL)
-#define AssertIsNotNull(X) _assert_null(X, !=, NULL)
+#define AssertIsNull(X) _assert_null(X, ==)
+#define AssertIsNotNull(X) _assert_null(X, !=)
