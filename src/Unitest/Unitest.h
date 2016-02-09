@@ -21,6 +21,7 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include "Common.h"
+#include <Windows.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdarg.h>
@@ -95,12 +96,12 @@ void group_free(TEST_GROUP *tGroup);
 
 //assert
 void _assert_failed(const char *expr, ...);
-void _assert_succeeded(const char *expr, ...);
+void _assert_succeeded(const char *msg, ...);
 
 #define _assert_msg(expr, format, ...) \
   (expr) ? \
-     _assert_succeeded("Assertion '%s' succeeded: "#format, ## __VA_ARGS__, NULL) : \
-     _assert_failed("Assertion '%s' failed: "#format, ## __VA_ARGS__, NULL)
+     _assert_succeeded(">> [SUCCEEDED] Assertion '%s'\n", ## __VA_ARGS__, NULL) : \
+     _assert_failed(">> [FAILED] Assertion '%s'\n\n[REASON] "#format, ## __VA_ARGS__, NULL)
 
 
 #define _assert_int(X, OP, Y) {\

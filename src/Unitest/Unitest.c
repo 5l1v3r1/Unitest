@@ -17,7 +17,9 @@
 */
 
 #include "Unitest.h"
+#include "Coloring.h"
 
+CONSOLE_SCREEN_BUFFER_INFO csbi;
 
 static bool _list_grow(List * list)
 {
@@ -176,7 +178,17 @@ void group_run_all(TEST_GROUP *tGroup)
 	for (list_front(methods); !list_at_end(methods); list_advance(methods))
 	{
 		tMethod = (TMethod*)list_val(methods);
-		printf("\n--[[ %s: %s\n", tGroup->name, tMethod->name);
+		printf("\n---\nTesting function ");
+		Start_Coloring(&csbi);
+		GOLD;
+		printf("%s", tMethod->name);
+		Stop_Coloring(csbi);
+		printf("(Group: "); 
+		Start_Coloring(&csbi);
+		GOLD;
+		printf("%s", tGroup->name);
+		Stop_Coloring(csbi);
+		printf(")\n---\n\n");
 		tMethod->function();
 	}
 }
@@ -210,7 +222,10 @@ void _assert_failed(const char *msg, ...)
 
 	va_start(valist, msg);
 	vsnprintf_s(buf, BUFSIZ, _TRUNCATE, msg, valist);
-	printf("[FAILURE] %s\n", buf);
+	Start_Coloring(&csbi);
+	RED;
+	printf("%s\n\n", buf);
+	Stop_Coloring(csbi);
 
 	va_end(valist);
 }
@@ -223,7 +238,10 @@ void _assert_succeeded(const char *msg, ...)
 
 	va_start(valist, msg);
 	vsnprintf_s(buf, BUFSIZ, _TRUNCATE, msg, valist);
-	printf("[SUCCESS] %s\n", buf);
+	Start_Coloring(&csbi);
+	GREEN;
+	printf("%s\n", buf);
+	Stop_Coloring(csbi);
 
 	va_end(valist);
 }

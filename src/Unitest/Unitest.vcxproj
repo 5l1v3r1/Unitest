@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Coloring.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Unitest.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Coloring.c" />
     <ClCompile Include="Common.c" />
     <ClCompile Include="Unitest.c" />
   </ItemGroup>

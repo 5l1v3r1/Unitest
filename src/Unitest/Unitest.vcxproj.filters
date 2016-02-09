@@ -21,12 +21,18 @@
     <ClInclude Include="Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Coloring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Unitest.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Common.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Coloring.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
