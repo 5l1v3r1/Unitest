@@ -31,6 +31,8 @@ TEST_METHOD(TestMethod1)
 	bool xyz = true;
 	char www[10] = { 0 };
 	double nnn = -5.2;
+	const char *x1 = "aa";
+	const char *x2 = "ab";
 
 	AssertAreEqual_int(xxx, 101);
 	AssertAreNotEqual_int(xxx, 101);
@@ -48,6 +50,10 @@ TEST_METHOD(TestMethod1)
 
 	AssertAreEqual_str(aaa, "test111");
 	AssertAreNotEqual_str(aaa, "test111");
+	AssertLessThan_str(x1, x2);
+	AssertLessEqual_str(x1, x2);
+	AssertGreaterThan_str(x1, x2);
+	AssertGreaterEqual_str(x1, x2);
 
 	AssertIsTrue(xyz);
 	AssertIsFalse(xyz);
@@ -66,6 +72,8 @@ TEST_METHOD(TestMethod2)
 	char *ttt = NULL;
 	int xxx = -1;
 	double nnn = 2.0;
+	const char *x1 = "cc";
+	const char *x2 = "bb";
 
 	AssertAreEqual_int(yyy, 101);
 	AssertAreNotEqual_int(yyy, 101);
@@ -83,6 +91,10 @@ TEST_METHOD(TestMethod2)
 
 	AssertAreEqual_str(ccc, "test222");
 	AssertAreNotEqual_str(ccc, "test222");
+	AssertLessThan_str(x1, x2);
+	AssertLessEqual_str(x1, x2);
+	AssertGreaterThan_str(x1, x2);
+	AssertGreaterEqual_str(x1, x2);
 
 	AssertIsTrue(zxc);
 	AssertIsFalse(zxc);

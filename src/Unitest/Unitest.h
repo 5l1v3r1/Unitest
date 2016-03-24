@@ -131,7 +131,7 @@ void _assert_succeeded(const char *msg, ...);
 #define _assert_str(X, OP, Y) {\
 	const char* _ck_x = (X); \
 	const char* _ck_y = (Y); \
-	_assert_msg(0 OP strcmp(_ck_y, _ck_x), "%s == %s", #X" "#OP" "#Y, #X, _ck_x); \
+	_assert_msg(strcmp(_ck_x, _ck_y) OP 0, "%s == %s, %s == %s", #X" "#OP" "#Y, #X, _ck_x, #Y, _ck_y); \
 }
 
 #define _assert_true(X, OP) {\
@@ -201,11 +201,18 @@ void _assert_succeeded(const char *msg, ...);
 #define AssertGreaterEqual_single(X, Y) _assert_single(X, >=, Y)
 
 
-//X==Y
+//strcmp(X, Y)==0
 #define AssertAreEqual_str(X, Y) _assert_str(X, ==, Y)
-//X!=Y
+//strcmp(X, Y)!=0
 #define AssertAreNotEqual_str(X, Y) _assert_str(X, !=, Y)
-
+//strcmp(X, Y)<0
+#define AssertLessThan_str(X, Y) _assert_str(X, <, Y)
+//strcmp(X, Y)<=0
+#define AssertLessEqual_str(X, Y) _assert_str(X, <=, Y)
+//strcmp(X, Y)>0
+#define AssertGreaterThan_str(X, Y) _assert_str(X, >, Y)
+//strcmp(X, Y)>=0
+#define AssertGreaterEqual_str(X, Y) _assert_str(X, >=, Y)
 
 //X==true
 #define AssertIsTrue(X) _assert_true(X, ==)
