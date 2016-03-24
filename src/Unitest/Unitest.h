@@ -107,51 +107,65 @@ void _assert_succeeded(const char *msg, ...);
 #define _assert_int(X, OP, Y) {\
 	long long _ck_x = (X); \
 	long long _ck_y = (Y); \
-	_assert_msg(_ck_x OP _ck_y, "%s == %I64d", #X" "#OP" "#Y, #Y, _ck_y); \
+	_assert_msg(_ck_x OP _ck_y, "%s == %I64d", #X" "#OP" "#Y, #X, _ck_x); \
 }
 
 #define _assert_double(X, OP, Y) {\
 	double _ck_x = (X); \
 	double _ck_y = (Y); \
-	_assert_msg(_ck_x OP _ck_y, "%s == %f", #X" "#OP" "#Y, #Y, _ck_y); \
+	_assert_msg(_ck_x OP _ck_y, "%s == %f", #X" "#OP" "#Y, #X, _ck_x); \
 }
 
 #define _assert_single(X, OP, Y) {\
 	float _ck_x = (X); \
 	float _ck_y = (Y); \
-	_assert_msg(_ck_x OP _ck_y, "%s == %f", #X" "#OP" "#Y, #Y, _ck_y); \
+	_assert_msg(_ck_x OP _ck_y, "%s == %f", #X" "#OP" "#Y, #X, _ck_x); \
 }
 
 #define _assert_str(X, OP, Y) {\
 	const char* _ck_x = (X); \
 	const char* _ck_y = (Y); \
-	_assert_msg(0 OP strcmp(_ck_y, _ck_x), "%s == %s", #X" "#OP" "#Y, #Y, _ck_y); \
+	_assert_msg(0 OP strcmp(_ck_y, _ck_x), "%s == %s", #X" "#OP" "#Y, #X, _ck_x); \
 }
 
 #define _assert_true(X, OP) {\
 	bool _ck_x = (X); \
-	_assert_msg(true OP _ck_x, "%s == %s", "true "#OP" "#X, #X, _ck_x?"true":"false"); \
+	_assert_msg(true OP _ck_x, "%s == %s", #X" "#OP" true", #X, _ck_x?"true":"false"); \
 }
 
 #define _assert_null(X, OP) {\
 	const void* _ck_x = (X); \
-	_assert_msg(NULL OP _ck_x, "%s is %s", "NULL "#OP" "#X, #X, _ck_x==NULL?"NULL":"not NULL"); \
+	_assert_msg(NULL OP _ck_x, "%s is %s", #X" "#OP" NULL", #X, _ck_x==NULL?"NULL":"not NULL"); \
 }
 
+//X==Y
 #define AssertAreEqual_int(X, Y) _assert_int(X, ==, Y)
+//X!=Y
 #define AssertAreNotEqual_int(X, Y) _assert_int(X, !=, Y)
+//X<Y
+#define AssertLessThan_int(X, Y) _assert_int(X, <, Y)
 
+//X==Y
 #define AssertAreEqual_double(X, Y) _assert_double(X, ==, Y)
+//X!=Y
 #define AssertAreNotEqual_double(X, Y) _assert_double(X, !=, Y)
 
+//X==Y
 #define AssertAreEqual_single(X, Y) _assert_single(X, ==, Y)
+//X!=Y
 #define AssertAreNotEqual_single(X, Y) _assert_single(X, !=, Y)
 
+//X==Y
 #define AssertAreEqual_str(X, Y) _assert_str(X, ==, Y)
+//X!=Y
 #define AssertAreNotEqual_str(X, Y) _assert_str(X, !=, Y)
 
+//X==true
 #define AssertIsTrue(X) _assert_true(X, ==)
+//X==false
 #define AssertIsFalse(X) _assert_true(X, !=)
 
+//X==null
 #define AssertIsNull(X) _assert_null(X, ==)
+//X!=null
 #define AssertIsNotNull(X) _assert_null(X, !=)

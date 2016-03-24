@@ -31,14 +31,15 @@ TEST_METHOD(TestMethod1)
 	bool xyz = true;
 	char www[10] = { 0 };
 
-	AssertAreEqual_int(101, xxx);
-	AssertAreNotEqual_int(101, xxx);
+	AssertAreEqual_int(xxx, 101);
+	AssertAreNotEqual_int(xxx, 101);
+	AssertLessThan_int(xxx, 0);
 
-	AssertAreEqual_double(21.100123, zzz);
-	AssertAreNotEqual_double(21.100123, zzz);
+	AssertAreEqual_double(zzz, 21.100123);
+	AssertAreNotEqual_double(zzz, 21.100123);
 
-	AssertAreEqual_str("test111", aaa);
-	AssertAreNotEqual_str("test111", aaa);
+	AssertAreEqual_str(aaa, "test111");
+	AssertAreNotEqual_str(aaa, "test111");
 
 	AssertIsTrue(xyz);
 	AssertIsFalse(xyz);
@@ -55,15 +56,17 @@ TEST_METHOD(TestMethod2)
 	const char *ccc = "test222";
 	bool zxc = false;
 	char *ttt = NULL;
+	int xxx = -1;
 
-	AssertAreEqual_int(101, yyy);
-	AssertAreNotEqual_int(101, yyy);
+	AssertAreEqual_int(yyy, 101);
+	AssertAreNotEqual_int(yyy, 101);
+	AssertLessThan_int(xxx, 0);
 
-	AssertAreEqual_double(22.00012345, zzz);
-	AssertAreNotEqual_double(22.00012345, zzz);
+	AssertAreEqual_double(zzz, 22.00012345);
+	AssertAreNotEqual_double(zzz, 22.00012345);
 
-	AssertAreEqual_str("test222", ccc);
-	AssertAreNotEqual_str("test222", ccc);
+	AssertAreEqual_str(ccc, "test222");
+	AssertAreNotEqual_str(ccc, "test222");
 
 	AssertIsTrue(zxc);
 	AssertIsFalse(zxc);
