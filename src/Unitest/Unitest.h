@@ -110,10 +110,10 @@ void _assert_succeeded(const char *msg, ...);
 	_assert_msg(_ck_x OP _ck_y, "%s == %I64d", #X" "#OP" "#Y, #X, _ck_x); \
 }
 
-#define _assert_int(X, OP, Y) {\
+#define _assert_uint(X, OP, Y) {\
 	unsigned long long _ck_x = (X); \
 	unsigned long long _ck_y = (Y); \
-	_assert_msg(_ck_x OP _ck_y, "%s == %I64d", #X" "#OP" "#Y, #X, _ck_x); \
+	_assert_msg(_ck_x OP _ck_y, "%s == %I64u", #X" "#OP" "#Y, #X, _ck_x); \
 }
 
 #define _assert_double(X, OP, Y) {\
