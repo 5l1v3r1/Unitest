@@ -110,6 +110,12 @@ void _assert_succeeded(const char *msg, ...);
 	_assert_msg(_ck_x OP _ck_y, "%s == %I64d", #X" "#OP" "#Y, #X, _ck_x); \
 }
 
+#define _assert_int(X, OP, Y) {\
+	unsigned long long _ck_x = (X); \
+	unsigned long long _ck_y = (Y); \
+	_assert_msg(_ck_x OP _ck_y, "%s == %I64d", #X" "#OP" "#Y, #X, _ck_x); \
+}
+
 #define _assert_double(X, OP, Y) {\
 	double _ck_x = (X); \
 	double _ck_y = (Y); \
@@ -138,32 +144,74 @@ void _assert_succeeded(const char *msg, ...);
 	_assert_msg(NULL OP _ck_x, "%s is %s", #X" "#OP" NULL", #X, _ck_x==NULL?"NULL":"not NULL"); \
 }
 
+
 //X==Y
 #define AssertAreEqual_int(X, Y) _assert_int(X, ==, Y)
 //X!=Y
 #define AssertAreNotEqual_int(X, Y) _assert_int(X, !=, Y)
 //X<Y
 #define AssertLessThan_int(X, Y) _assert_int(X, <, Y)
+//X<=Y
+#define AssertLessEqual_int(X, Y) _assert_int(X, <=, Y)
+//X>Y
+#define AssertGreaterThan_int(X, Y) _assert_int(X, >, Y)
+//X>=Y
+#define AssertGreaterEqual_int(X, Y) _assert_int(X, >=, Y)
+
+
+//X==Y
+#define AssertAreEqual_uint(X, Y) _assert_uint(X, ==, Y)
+//X!=Y
+#define AssertAreNotEqual_uint(X, Y) _assert_uint(X, !=, Y)
+//X<Y
+#define AssertLessThan_uint(X, Y) _assert_uint(X, <, Y)
+//X<=Y
+#define AssertLessEqual_uint(X, Y) _assert_uint(X, <=, Y)
+//X>Y
+#define AssertGreaterThan_uint(X, Y) _assert_uint(X, >, Y)
+//X>=Y
+#define AssertGreaterEqual_uint(X, Y) _assert_uint(X, >=, Y)
+
 
 //X==Y
 #define AssertAreEqual_double(X, Y) _assert_double(X, ==, Y)
 //X!=Y
 #define AssertAreNotEqual_double(X, Y) _assert_double(X, !=, Y)
+//X<Y
+#define AssertLessThan_double(X, Y) _assert_double(X, <, Y)
+//X<=Y
+#define AssertLessEqual_double(X, Y) _assert_double(X, <=, Y)
+//X>Y
+#define AssertGreaterThan_double(X, Y) _assert_double(X, >, Y)
+//X>=Y
+#define AssertGreaterEqual_double(X, Y) _assert_double(X, >=, Y)
+
 
 //X==Y
 #define AssertAreEqual_single(X, Y) _assert_single(X, ==, Y)
 //X!=Y
 #define AssertAreNotEqual_single(X, Y) _assert_single(X, !=, Y)
+//X<Y
+#define AssertLessThan_single(X, Y) _assert_single(X, <, Y)
+//X<=Y
+#define AssertLessEqual_single(X, Y) _assert_single(X, <=, Y)
+//X>Y
+#define AssertGreaterThan_single(X, Y) _assert_single(X, >, Y)
+//X>=Y
+#define AssertGreaterEqual_single(X, Y) _assert_single(X, >=, Y)
+
 
 //X==Y
 #define AssertAreEqual_str(X, Y) _assert_str(X, ==, Y)
 //X!=Y
 #define AssertAreNotEqual_str(X, Y) _assert_str(X, !=, Y)
 
+
 //X==true
 #define AssertIsTrue(X) _assert_true(X, ==)
 //X==false
 #define AssertIsFalse(X) _assert_true(X, !=)
+
 
 //X==null
 #define AssertIsNull(X) _assert_null(X, ==)

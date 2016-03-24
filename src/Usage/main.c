@@ -30,13 +30,21 @@ TEST_METHOD(TestMethod1)
 	const char *aaa = "test000";
 	bool xyz = true;
 	char www[10] = { 0 };
+	double nnn = -5.2;
 
 	AssertAreEqual_int(xxx, 101);
 	AssertAreNotEqual_int(xxx, 101);
 	AssertLessThan_int(xxx, 0);
+	AssertLessEqual_int(xxx, 0);
+	AssertGreaterThan_int(xxx, 0);
+	AssertGreaterEqual_int(xxx, 0);
 
 	AssertAreEqual_double(zzz, 21.100123);
 	AssertAreNotEqual_double(zzz, 21.100123);
+	AssertLessThan_double(nnn, 0.0);
+	AssertLessEqual_double(nnn, 0.0);
+	AssertGreaterThan_double(nnn, 0.0);
+	AssertGreaterEqual_double(nnn, 0.0);
 
 	AssertAreEqual_str(aaa, "test111");
 	AssertAreNotEqual_str(aaa, "test111");
@@ -57,13 +65,21 @@ TEST_METHOD(TestMethod2)
 	bool zxc = false;
 	char *ttt = NULL;
 	int xxx = -1;
+	double nnn = 2.0;
 
 	AssertAreEqual_int(yyy, 101);
 	AssertAreNotEqual_int(yyy, 101);
 	AssertLessThan_int(xxx, 0);
+	AssertLessEqual_int(xxx, 0);
+	AssertGreaterThan_int(xxx, 0);
+	AssertGreaterEqual_int(xxx, 0);
 
 	AssertAreEqual_double(zzz, 22.00012345);
 	AssertAreNotEqual_double(zzz, 22.00012345);
+	AssertLessThan_double(nnn, 0.0);
+	AssertLessEqual_double(nnn, 0.0);
+	AssertGreaterThan_double(nnn, 0.0);
+	AssertGreaterEqual_double(nnn, 0.0);
 
 	AssertAreEqual_str(ccc, "test222");
 	AssertAreNotEqual_str(ccc, "test222");
